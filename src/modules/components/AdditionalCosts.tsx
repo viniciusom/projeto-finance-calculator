@@ -1,9 +1,12 @@
 import React from 'react';
+import { Typography } from '@material-ui/core';
 
 function AdditionalCosts() {
   return(
     <>
-      <h4>AdditionalCosts</h4>
+      <Typography variant="h6" component="h2">
+        AdditionalCosts
+      </Typography>
       <label>Name</label>
       <input type="text" id="ac-name" placeholder="name"/>
       <label>Value</label>

@@ -1,9 +1,12 @@
 import React from 'react';
+import { Typography } from '@material-ui/core';
 
 function FixedCosts() {
   return(
     <>
-      <h4>FixedCosts</h4>
+      <Typography variant="h6" component="h2">
+        FixedCosts
+      </Typography>
       <label>Name</label>
       <input type="text" id="fc-name" placeholder="name"/>
       <label>Value</label>
