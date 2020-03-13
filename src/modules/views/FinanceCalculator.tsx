@@ -42,14 +42,24 @@ function FinanceCalculator() {
   }));
   const classes = useStyles();
   const [type, setType] = React.useState('');
+  const [month, setMonth] = React.useState('');
   const inputLabel = React.useRef<HTMLLabelElement>(null);
   const [labelWidth, setLabelWidth] = React.useState(0);
   React.useEffect(() => {
     setLabelWidth(inputLabel.current!.offsetWidth);
   }, []);
-  const handleChange = (event: any) => {
-    setType(event.target.value);
+  const handleType = (type: any) => {
+    setType(type.target.value);
+    if(type.target.value === 'fixedearning') {
+      alert('pegou');
+    }
   };
+  const handleMonth = (event: any) => {
+    setMonth(event.target.value);
+    if(event.target.value === 'april') {
+      
+    }
+  }
 
   function createData(month: string, earning: number, costs: number, balance: number) {
     return { month, earning, costs, balance };
@@ -80,7 +90,7 @@ function FinanceCalculator() {
                 labelId="select-type"
                 id="select-type"
                 value={type}
-                onChange={handleChange}
+                onChange={handleType}
                 labelWidth={labelWidth}
               >
                 <MenuItem value="">None</MenuItem>
@@ -92,15 +102,15 @@ function FinanceCalculator() {
             </FormControl>
           </Grid>
           <Grid item xs={4}>
-            <TextField id="outlined-basic" label="From" variant="outlined" className={classes.root} />
+            <TextField id="from" value="" label="From" variant="outlined" className={classes.root} />
           </Grid>
           <Grid item xs={4}>
-            <TextField id="outlined-basic" label="Value" variant="outlined" className={classes.root} />
+            <TextField id="value" value="" label="Value" variant="outlined" className={classes.root} />
           </Grid>
         </Grid>
         <Grid container spacing={2} justify="center" alignItems="center">
         <Grid item xs={4}>
-            <TextField id="outlined-basic" label="Manytimes" variant="outlined" className={classes.second} />
+            <TextField id="manytimes" value="" label="Manytimes" variant="outlined" className={classes.second} />
           </Grid>
           <Grid item xs={4}>
             <FormControl variant="outlined" className={classes.formMonth}>
@@ -110,8 +120,8 @@ function FinanceCalculator() {
               <Select
                 labelId="from-month"
                 id="from-month"
-                value={type}
-                onChange={handleChange}
+                value={month}
+                onChange={handleMonth}
                 labelWidth={labelWidth}
               >
                 <MenuItem value="">None</MenuItem>
