@@ -42,39 +42,61 @@ function FinanceCalculator() {
   }));
   const classes = useStyles();
   const [type, setType] = React.useState('');
+  const [from, setFrom] = React.useState('');
+  const [values, setValues] = React.useState('');
+  const [manytimes, setManytimes] = React.useState('');
   const [month, setMonth] = React.useState('');
   const inputLabel = React.useRef<HTMLLabelElement>(null);
   const [labelWidth, setLabelWidth] = React.useState(0);
   React.useEffect(() => {
     setLabelWidth(inputLabel.current!.offsetWidth);
   }, []);
-  const handleType = (type: any) => {
-    setType(type.target.value);
-    if(type.target.value === 'fixedearning') {
-      alert('pegou');
-    }
+
+  const handleType = (event: any) => {
+    setType(event.target.value);
   };
   const handleMonth = (event: any) => {
     setMonth(event.target.value);
-    if(event.target.value === 'april') {
-      
-    }
+  }
+  const handleFrom = (event: any) => {
+    setFrom(event.target.value);
+  }
+  const handleValues = (event: any) => {
+    setValues(event.target.value);
+  }
+  const handleManytimes = (event: any) => {
+    setManytimes(event.target.value);
+  }
+  const handleClick = () => {
+    alert(`${type} ${from} ${values} ${manytimes} ${month}`);
   }
 
-  function createData(month: string, earning: number, costs: number, balance: number) {
-    return { month, earning, costs, balance };
+  const months = [
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+
+  function createData(months: string, earning: number, costs: number, balance: number) {
+    return { months, earning, costs, balance };
   }
 
   const rows = [
-    createData('April', 4750, 1250, 3500),
-    createData('May', 4750, 1250, 7000),
-    createData('June', 4750, 1250, 10500),
-    createData('July', 4750, 1250, 14000),
-    createData('August', 4750, 1250, 17500),
-    createData('September', 4750, 1250, 21000),
-    createData('October', 4750, 1250, 24500),
-    createData('November', 4750, 1250, 28000),
-    createData('December', 4750, 1250, 31500),
+    createData(months[0], 4750, 1250, 3500),
+    createData(months[1], 4750, 1250, 7000),
+    createData(months[2], 4750, 1250, 10500),
+    createData(months[3], 4750, 1250, 14000),
+    createData(months[4], 4750, 1250, 17500),
+    createData(months[5], 4750, 1250, 21000),
+    createData(months[6], 4750, 1250, 24500),
+    createData(months[7], 4750, 1250, 28000),
+    createData(months[8], 4750, 1250, 31500),
   ];
 
   return (
@@ -102,15 +124,15 @@ function FinanceCalculator() {
             </FormControl>
           </Grid>
           <Grid item xs={4}>
-            <TextField id="from" value="" label="From" variant="outlined" className={classes.root} />
+            <TextField id="from" value={from} onChange={handleFrom} label="From" variant="outlined" className={classes.root} />
           </Grid>
           <Grid item xs={4}>
-            <TextField id="value" value="" label="Value" variant="outlined" className={classes.root} />
+            <TextField id="value" value={values} onChange={handleValues} label="Value" variant="outlined" className={classes.root} />
           </Grid>
         </Grid>
         <Grid container spacing={2} justify="center" alignItems="center">
         <Grid item xs={4}>
-            <TextField id="manytimes" value="" label="Manytimes" variant="outlined" className={classes.second} />
+            <TextField id="manytimes" value={manytimes} onChange={handleManytimes} label="Manytimes" variant="outlined" className={classes.second} />
           </Grid>
           <Grid item xs={4}>
             <FormControl variant="outlined" className={classes.formMonth}>
@@ -125,20 +147,20 @@ function FinanceCalculator() {
                 labelWidth={labelWidth}
               >
                 <MenuItem value="">None</MenuItem>
-                <MenuItem value="april">April</MenuItem>
-                <MenuItem value="may">May</MenuItem>
-                <MenuItem value="june">June</MenuItem>
-                <MenuItem value="july">July</MenuItem>
-                <MenuItem value="august">August</MenuItem>
-                <MenuItem value="september">September</MenuItem>
-                <MenuItem value="october">October</MenuItem>
-                <MenuItem value="november">November</MenuItem>
-                <MenuItem value="december">December</MenuItem>
+                <MenuItem value={4}>{months[0]}</MenuItem>
+                <MenuItem value={5}>{months[1]}</MenuItem>
+                <MenuItem value={6}>{months[2]}</MenuItem>
+                <MenuItem value={7}>{months[3]}</MenuItem>
+                <MenuItem value={8}>{months[4]}</MenuItem>
+                <MenuItem value={9}>{months[5]}</MenuItem>
+                <MenuItem value={10}>{months[6]}</MenuItem>
+                <MenuItem value={11}>{months[7]}</MenuItem>
+                <MenuItem value={12}>{months[8]}</MenuItem>
               </Select>
             </FormControl>
           </Grid>
           <Grid item xs={4}>
-            <Button variant="contained" color="primary" href="#contained-buttons" className={classes.button}>
+            <Button variant="contained" onClick={handleClick} color="primary" href="#contained-buttons" className={classes.button}>
               Calculate
             </Button>
           </Grid>
@@ -157,9 +179,9 @@ function FinanceCalculator() {
             </TableHead>
             <TableBody>
               {rows.map(row => (
-                <TableRow key={row.month}>
+                <TableRow key={row.months}>
                   <TableCell component="th" scope="row">
-                    {row.month}
+                    {row.months}
                   </TableCell>
                   <TableCell>{row.earning}</TableCell>
                   <TableCell>{row.costs}</TableCell>
