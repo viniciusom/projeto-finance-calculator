@@ -1,0 +1,13 @@
+Mês:			Earning:		Costs:
+		
+(Considerar manytimes	(Considerar Type	
+e month para saber 	para saber se o value
+quantas vezes tem que 	vai entrar em Earning
+repetir o value a	ou Costs do mês e se
+partir do mes month.)	se é fixo ou não, se
+			for fixo o manytimes
+			não pode ser definido
+			e o value deve ser 
+			atribuido a todos os
+			meses a partir do 
+			month.)

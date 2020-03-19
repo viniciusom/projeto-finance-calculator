@@ -43,9 +43,9 @@ function FinanceCalculator() {
   const classes = useStyles();
   const [type, setType] = React.useState('');
   const [from, setFrom] = React.useState('');
-  const [values, setValues] = React.useState('');
-  const [manytimes, setManytimes] = React.useState('');
-  const [month, setMonth] = React.useState('');
+  const [values, setValues] = React.useState(0);
+  const [manytimes, setManytimes] = React.useState(0);
+  const [month, setMonth] = React.useState(0);
   const inputLabel = React.useRef<HTMLLabelElement>(null);
   const [labelWidth, setLabelWidth] = React.useState(0);
   React.useEffect(() => {
@@ -67,9 +67,6 @@ function FinanceCalculator() {
   const handleManytimes = (event: any) => {
     setManytimes(event.target.value);
   }
-  const handleClick = () => {
-    alert(`${type} ${from} ${values} ${manytimes} ${month}`);
-  }
 
   const months = [
     'April',
@@ -87,17 +84,15 @@ function FinanceCalculator() {
     return { months, earning, costs, balance };
   }
 
-  const rows = [
-    createData(months[0], 4750, 1250, 3500),
-    createData(months[1], 4750, 1250, 7000),
-    createData(months[2], 4750, 1250, 10500),
-    createData(months[3], 4750, 1250, 14000),
-    createData(months[4], 4750, 1250, 17500),
-    createData(months[5], 4750, 1250, 21000),
-    createData(months[6], 4750, 1250, 24500),
-    createData(months[7], 4750, 1250, 28000),
-    createData(months[8], 4750, 1250, 31500),
-  ];
+  var rows = [
+    createData(months[month], values, 0, values*manytimes),
+    ];
+
+  const handleClick = () => {
+    alert(`${type} ${from} ${values} ${manytimes} ${month}`);
+    
+    console.log(rows);
+  }
 
   return (
     <>
@@ -147,15 +142,15 @@ function FinanceCalculator() {
                 labelWidth={labelWidth}
               >
                 <MenuItem value="">None</MenuItem>
-                <MenuItem value={4}>{months[0]}</MenuItem>
-                <MenuItem value={5}>{months[1]}</MenuItem>
-                <MenuItem value={6}>{months[2]}</MenuItem>
-                <MenuItem value={7}>{months[3]}</MenuItem>
-                <MenuItem value={8}>{months[4]}</MenuItem>
-                <MenuItem value={9}>{months[5]}</MenuItem>
-                <MenuItem value={10}>{months[6]}</MenuItem>
-                <MenuItem value={11}>{months[7]}</MenuItem>
-                <MenuItem value={12}>{months[8]}</MenuItem>
+                <MenuItem value={0}>{months[0]}</MenuItem>
+                <MenuItem value={1}>{months[1]}</MenuItem>
+                <MenuItem value={2}>{months[2]}</MenuItem>
+                <MenuItem value={3}>{months[3]}</MenuItem>
+                <MenuItem value={4}>{months[4]}</MenuItem>
+                <MenuItem value={5}>{months[5]}</MenuItem>
+                <MenuItem value={6}>{months[6]}</MenuItem>
+                <MenuItem value={7}>{months[7]}</MenuItem>
+                <MenuItem value={8}>{months[8]}</MenuItem>
               </Select>
             </FormControl>
           </Grid>
@@ -171,7 +166,7 @@ function FinanceCalculator() {
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>Month</TableCell>
+                <TableCell>Month</TableCell>  
                 <TableCell>Earning</TableCell>
                 <TableCell>Costs</TableCell>
                 <TableCell>Balance</TableCell>
